@@ -1,0 +1,12 @@
+a-text {
+  font-weight: bold;
+  text-shadow: 0 0 10px #000;
+  
+}
+
+/* Optional background for labels */
+.planet-label {
+  color: white;
+  align: center;
+  width: 40;
+}
