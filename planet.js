@@ -134,50 +134,50 @@ document.addEventListener('DOMContentLoaded', () => {
     solarSystem.appendChild(ringEntity);
   });
 
-// --- Asteroid Belt ---
-const asteroidCount = 200;
-const aMin = 19; // semi-major axis minimum (just outside Mars)
-const aMax = 21; // semi-major axis maximum (just inside Jupiter)
-const eccentricity = 0.05; // small eccentricity for realism
+  // --- Asteroid Belt ---
+  const asteroidCount = 200;
+  const aMin = 19; // semi-major axis minimum (just outside Mars)
+  const aMax = 21; // semi-major axis maximum (just inside Jupiter)
+  const eccentricity = 0.05; // small eccentricity for realism
 
-// 1. Create the Dark Transparent Ring for the Asteroid Belt
-const asteroidRing = document.createElement('a-ring');
-asteroidRing.setAttribute('radius-inner', aMin);
-asteroidRing.setAttribute('radius-outer', aMax);
-asteroidRing.setAttribute('rotation', '-90 0 0'); // flat on XZ plane
-asteroidRing.setAttribute('material', 'color: #6e5151ff; opacity: 0.3; transparent: true; side: double;'); // Dark and semi-transparent
-asteroidRing.setAttribute('position', '0 1.24 -5'); // Align with solar system center
-solarSystem.appendChild(asteroidRing);
+  // Dark Transparent Ring for the Asteroid Belt
+  const asteroidRing = document.createElement('a-ring');
+  asteroidRing.setAttribute('radius-inner', aMin);
+  asteroidRing.setAttribute('radius-outer', aMax);
+  asteroidRing.setAttribute('rotation', '-90 0 0'); // flat on XZ plane
+  asteroidRing.setAttribute('material', 'color: #6e5151ff; opacity: 0.3; transparent: true; side: double;'); // Dark and semi-transparent
+  asteroidRing.setAttribute('position', '0 1.24 -5'); // Align with solar system center
+  solarSystem.appendChild(asteroidRing);
 
-// 2. Add Asteroids on top of the ring
-for (let i = 0; i < asteroidCount; i++) {
-  const asteroid = document.createElement('a-sphere');
-  asteroid.setAttribute('color', '#111111'); // very dark gray
-  asteroid.setAttribute('material', 'opacity: 0.6; transparent: true;'); // semi-transparent asteroids
-  asteroid.setAttribute('radius', (Math.random() * 0.15 + 0.05).toFixed(2));
+  // Asteroids on top of the ring
+  for (let i = 0; i < asteroidCount; i++) {
+    const asteroid = document.createElement('a-sphere');
+    asteroid.setAttribute('color', '#111111'); // very dark gray
+    asteroid.setAttribute('material', 'opacity: 0.6; transparent: true;'); // semi-transparent asteroids
+    asteroid.setAttribute('radius', (Math.random() * 0.15 + 0.05).toFixed(2));
 
-  // Random semi-major axis between Mars and Jupiter
-  const a = aMin + Math.random() * (aMax - aMin);
-  const b = a * Math.sqrt(1 - eccentricity * eccentricity);
+    // Random semi-major axis between Mars and Jupiter
+    const a = aMin + Math.random() * (aMax - aMin);
+    const b = a * Math.sqrt(1 - eccentricity * eccentricity);
 
-  // Even angle distribution with slight randomness
-  const baseAngle = (i / asteroidCount) * 2 * Math.PI;
-  const randomOffset = (Math.random() - 0.5) * (Math.PI / asteroidCount) * 10;
-  const angle = baseAngle + randomOffset;
+    // Even angle distribution with slight randomness
+    const baseAngle = (i / asteroidCount) * 2 * Math.PI;
+    const randomOffset = (Math.random() - 0.5) * (Math.PI / asteroidCount) * 10;
+    const angle = baseAngle + randomOffset;
 
-  const x = a * Math.cos(angle);
-  const z = b * Math.sin(angle);
+    const x = a * Math.cos(angle);
+    const z = b * Math.sin(angle);
 
-  asteroid.setAttribute('position', `${x} 1.26 ${z}`); // slightly above the ring
+    asteroid.setAttribute('position', `${x} 1.26 ${z}`); // slightly above the ring
 
-  // Optional: add slow orbit for realism
-  asteroid.setAttribute(
-    'elliptical-orbit',
-    `a: ${a}; b: ${b}; speed: ${60000 + Math.random() * 20000}; centerX: 0; centerY: 1.25; centerZ: -5`
-  );
+    asteroid.setAttribute(
+       'elliptical-orbit',
+       `a: ${a}; b: ${b}; speed: ${60000 + Math.random() * 20000}; centerX: 0; centerY: 1.25; centerZ: -5`
+    );
 
-  solarSystem.appendChild(asteroid);
-}
+    solarSystem.appendChild(asteroid);
+  }
 
 
 });
+
